@@ -1,0 +1,137 @@
+﻿body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    /*background-color: #eee;*/
+}
+
+.containers {
+    width: 960px;
+    height: 630px;
+    margin: auto;
+}
+
+.loginhead {
+    height: 110px;
+    font-family: Cambria, Helvetica, sans-serif;
+    font-size: 46px;
+    /*text-align:center;*/
+}
+
+
+
+.loginbody {
+    height: 340px;
+}
+
+.loginfoot {
+    height: 180px;
+}
+
+.clear {
+    display: block;
+    clear: both;
+}
+
+.foot {
+    float: left;
+    font-size: 13px;
+    width: 960px;
+    background-color: #6d5e8d;
+    line-height: 25px;
+    text-align: center;
+    color: white;
+}
+
+
+.loginad {
+    height: 340px;
+    width: 600px;
+    float: left;
+}
+
+.loginbox {
+    height: 269px;
+    width: 299px;
+    margin-right: 20px;
+    margin-left: auto;
+    padding: 20px;
+    padding-top: 50px;
+    background-color: #F5F5F5;
+    border: 1px solid #CCC;
+}
+
+.login-title {
+    height: 18px;
+    line-height: 18px;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #3c3c3c;
+    margin-top: 9px;
+    padding-bottom: 8px;
+    font-weight: 700;
+}
+
+
+.login-body input[type="text"],
+.login-body input[type="password"] {
+    border: 1px solid #c8c8c8;
+    color: #777;
+    font: 13px Helvetica, Arial, sans-serif;
+    margin: 0 0 10px;
+    padding: 15px 10px 15px 40px;
+    width: 240px;
+    background: #eae7e7;
+    border-radius: 3px;
+}
+
+
+.login-body input[type="text"] {
+    background: url(../images/8bcLQqF.png) 0 10px no-repeat;
+
+}
+
+
+.login-body input[type="password"] {
+    background: url(../images/8bcLQqF.png) 0 -50px no-repeat;
+}
+
+    .login-body input[type="text"]:focus,
+    .login-body input[type="password"]:focus {
+        box-shadow: 0 0 2px #ed1c24 inset;
+        background-color: #fff;
+        border: 1px solid #ed1c24;
+        outline: none;
+    }
+
+
+#LoginButton {
+    border-radius: 3px;
+    color: #444;
+    width: 82px;
+    height: 32px;
+    border: 0px;
+    float: right;
+    margin-right: 24px;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #38f4fa;
+    text-shadow: 0 1px rgba(255, 255, 255, .75);
+    cursor: pointer;
+    margin-bottom: 20px;
+    line-height: 21px;
+    color: #ffffff;
+    font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.tb-login-text-box_rmk a {
+    color: #999;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+    background: transparent;
+    text-decoration: none;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+}

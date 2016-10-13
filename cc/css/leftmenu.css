@@ -1,0 +1,85 @@
+
+/*nav is ul*/
+#nav, #nav ul {
+ list-style: none;
+ background: #F9F9F9;
+ font-weight: bold;
+ padding: 0px;
+ margin: 0px;
+ border: solid 1px #CCCCCC;
+ border-bottom: 0px;
+ width: 150px;
+ text-align: left;
+}
+
+#nav
+{
+ margin-left:10px;
+ margin-top:10px
+	}
+#nav ul ul{
+ border: solid 1px #CCCCCC;
+ border-bottom: 0px;
+}
+#nav a {
+ display: block;
+ width: 139px;
+ w\idth: 140px;
+ color: #333333;
+ text-decoration: none;
+ text-align: center;
+ border-bottom: solid 0px #CCCCCC;
+ text-align: left;
+ padding-left: 10px;
+}
+#nav a:hover{
+ color: #336666;
+}
+#nav li {
+ line-height: 22px;
+ position: relative;
+	top: 0px;
+	left: 0px;
+	width: 150px;
+}
+#nav li ul {
+ position: absolute;
+ left: -999em;
+ width: 150px;
+ font-weight: normal;
+ margin: 0px;
+ padding: 0px;
+}
+#nav li li {
+ width: 150px;
+}
+#nav li ul a {
+ width: 150px;
+ w\idth: 126px;
+ padding: 0px 12px;
+ line-height: 22px;
+ text-align: left;
+}
+#nav li ul ul {
+ margin: 0px 0 0 150px;
+}
+#nav li:hover ul ul,#nav li.sfhover ul ul{
+ left: -999em;
+}
+#nav li:hover ul, #nav li li:hover ul,#nav li.sfhover ul, #nav li li.sfhover ul{
+ left: auto;
+}
+#nav li:hover ul,#nav li.sfhover ul{
+ left: 150px;
+ top: 0px;
+}
+#nav li:hover, #nav li.sfhover {
+ background: #F5E3C0;
+}
+* html #nav li {
+ float: left;
+ height: 1%;
+}
+* html #nav li a {
+ height: 1%; 
+}
