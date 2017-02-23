@@ -386,7 +386,15 @@ public partial class Last_reminder : System.Web.UI.Page
             parms[1].Value = row[1].ToString();
             parms[2].Value = row[2].ToString();
             parms[3].Value = Convert.ToDateTime(row[3].ToString().Trim()).ToShortDateString();
-            parms[4].Value = row[4].ToString();
+            try
+            {
+
+                parms[4].Value = Convert.ToDateTime(row[4].ToString().Trim()).ToString("HH:mm:ss");
+            }
+            catch (Exception ex)
+            {
+                parms[4].Value = row[4].ToString();
+            }
             parms[5].Value = row[5].ToString();
             parms[6].Value = row[6].ToString();
             parms[7].Value = row[7].ToString();

@@ -1,0 +1,52 @@
+@charset "utf-8";
+.formboder{border:#CCC solid 1px;padding-left:5px;padding-right:5px;}
+.formheader1{border:#CCC solid 1px;text-align:left;color: #FFF;background-color: #666;padding-left:10px;padding-top:3px;padding-bottom:3px;}
+.formheader1p{border:#CCC solid 1px;text-align:left;color: #FFF;background-color: #666;padding-left:10px;line-height:20px}
+.formheader2{border:#CCC solid 1px;text-align:left;color: #FFF;background-color: #666;line-height:25px;font-size: 14px;}
+.formheader3{border:#CCC solid 1px;text-align:center;color: #FFF;background-color: #666;line-height:25px;font-size: 14px;}
+.formheader4{border:#CCC solid 1px;text-align:left;background-color: #999;}
+.formheader5{border:#CCC solid 1px;text-align:center;background-color: #B0C4DE;}
+.formheaderp{border:#CCC solid 1px;text-align:center;background-color: #B0C4DE;line-height:25px}
+.formheaderp2{border:#CCC solid 1px;text-align:center;line-height:25px}
+.formheader6{border:#CCC solid 1px;line-height:25px;font-size:14px;}
+.formIDheader{border:#CCC solid 1px;text-align:center;background-color: #B0C4DE;width:45px;}
+
+.checklist_item {border: #CCC solid 1px; line-height: 25px; font-size: 14px;padding:0px}
+.box { width: 600px; overflow: hidden; }
+
+
+.PageNum a{text-decoration:underline;}
+
+.formetitle{width:968px;margin:0 auto;line-height:40px;text-align:center;color:#1F215B;font-size: 25px;font-weight: bold;}
+#show_box{height:25px;border:1px solid #E6E6E6;background-color: #F5F5F5;width:968px;text-align:center;padding-top:12px;padding-bottom:15px;margin:0 auto;}
+.query_box2{background-color: #F5F5F5;border-right:1px solid #E6E6E6;border-left:1px solid #E6E6E6;border-bottom:1px solid #E6E6E6;width:1000px;}
+.query_box1{background-color: #F5F5F5;border:1px solid #E6E6E6;width:1000px;}
+
+.userlist{background-color: #F5F5F5;padding-top:5px;padding-bottom:6px;	padding-left:8px;padding-right:8px;border-top-width: 1px;border-right-width: 1px;
+	border-bottom-width: 2px;border-left-width: 1px;border-top-style: solid;border-right-style: solid;border-left-style: solid;	border-top-color: #E6E6E6;
+	border-right-color: #E6E6E6;border-left-color: #E6E6E6;}
+.gw{margin:0 auto;padding-bottom:12px;width:1000px;}
+.formarea{border:#CCC solid 1px;line-height:25px;font-size:14px;}
+
+
+.formareadata{border:#CCC solid 1px;line-height:20px;font-size:12px;}
+.formheaderdata{border:#CCC solid 1px;line-height:25px;font-size:13px;background-color:#F5F5F5;text-align:center;font-weight:bold}
+
+.formIDarea{border:#CCC solid 1px;line-height:25px;font-size:14px;width:40px;table-layout:fixed}
+.formarearesult{border:#CCC solid 1px;line-height:25px;font-size:14px;background-color:#F7F7A9}
+.formareaagent{border:#CCC solid 1px;line-height:25px;font-size:12px;text-align:left;padding-left:8px;width:340px;}
+.formareasmall{border:#CCC solid 1px;font-size:13px;}
+.footerstyle1{border:#CCC solid 1px;line-height:25px;background-color: #666;font-size: 14px;color: #FFF;font-weight: bold;}
+.fastquery{	float: left;line-height: 25px;color: #D80425;font-weight: bold;margin: 0 0 0 0px;font-size: 15px;}
+.resultset{float: left;line-height: 30px;font-size: 15px;padding-left:8px;font-weight: bold;}
+#resultset2{float: left;padding-top:8px;margin-left:5px;}
+#resultset2 li{list-style:none;margin-bottom:5px;margin-left:2px;}
+.spanset1{background-color:#03A2DC ;color:#FFF;font-weight: bolder;padding: 1 3 1 3; }
+.resultset_a{float: left;line-height: 30px;font-size: 15px;font-weight: bold;background-color: #F5F5F5;border:1px solid #E6E6E6;}
+.resultback{float: right;line-height: 30px;font-size: 15px;font-weight: bold;margin-right:30px}
+.nodata{font-size: 15px;font-weight: bold;text-align:center;}
+.footer{border:#999 1px solid;width:998px;	line-height:28px;text-align:center;background-color:#E1E1E1;color:#1F215B;border-bottom:#666 3px solid;
+	margin-top: 50px;margin-right: auto;margin-bottom: 0;margin-left: auto;}
+#container{width: 1000px; height: 400px; margin: 0 auto}
+.searchtd{padding-top:5px;padding-bottom:5px;text-align:center;}
+.backToTop{font:81.25% arial, helvetica, sans-serif; display:none; width:35px; line-height:1.5;font-weight:bold; padding:5px; background-color:#000; color:#fff; font-size:12px; text-align:center; position:fixed; _position:absolute; right:10px; bottom:100px; _bottom:"auto"; cursor:pointer; opacity:.6; filter:Alpha(opacity=60);}

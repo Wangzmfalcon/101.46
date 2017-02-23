@@ -87,13 +87,19 @@
 </ul>
 </div>
 <div  id="Finding_Control"  style="width:1000px; height=150px;font-size:14px; float:left;">
-<ul>Finding_Control:
+<ul>Finding Control:
 <li>The_Alert_Date&nbsp;&nbsp; <asp:TextBox ID="TextBox5" runat="server">3</asp:TextBox>days
 <asp:Button ID="Button5"
     runat="server" Text="modify" onclick="Button5_Click" /></li>
 </ul>
 </div>
-
+<div  id="Outstation_MOA_Monitoring"  style="width:1000px; height=150px;font-size:14px; float:left;">
+<ul>Outstation MOA Monitoring:
+<li>Expiry Date&nbsp;&nbsp; <asp:TextBox ID="Expiry_Date" runat="server">30</asp:TextBox>days
+<asp:Button ID="Button6"
+    runat="server" Text="modify" onclick="Button6_Click" /></li>
+</ul>
+</div>
 </div>
 </div>
 </div>

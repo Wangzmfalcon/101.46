@@ -11,7 +11,7 @@
 <div class="logo">    
     <a href="http://www.airmacau.com.mo"><img alt="澳门航空" src="images/logo.gif" border="none" /></a>
         </div>
-<div class="toptitle">ENM Deadline Reminder</div><div class="version">V1.1</div>
+<div class="toptitle">ENM Deadline Reminder</div><div class="version">V2.0</div>
 </div>
 
 <div style="border-bottom: 4px solid #382649; width:1000px"></div>

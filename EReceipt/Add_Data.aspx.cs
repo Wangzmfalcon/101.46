@@ -40,6 +40,14 @@ public partial class Add_Data : System.Web.UI.Page
 
 
             //权限管理
+            if (Session["Station"] == null || Session["Station"].ToString() == "")
+            {
+
+                Response.Write("<script>alert('You have no authorization to view this page , please contact the administrator')</script>");
+                //ClientScript.RegisterStartupScript(GetType(), "message", "<script>alert('You have no authorization to view this page , please contact the administrator');</script>");
+                Server.Transfer("Home.aspx");
+            }
+
             string stationsession = Session["Station"].ToString();
             string SQL_query0 = "";
             if (stationsession == "ALL")
@@ -71,9 +79,51 @@ public partial class Add_Data : System.Web.UI.Page
 
 
             }
+            //Deposit.Items.Add("");
+            // SQL_query0 = "select Trans_Value from ERS_Trans where Trans_Type='Deposit'  order by Trans_Order ";
+            //using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query0))
+            //{
+            //    while (rdr.Read())
+            //    {
+            //        Deposit.Items.Add(Convert.ToString(rdr.GetSqlValue(0)));
+            //    }
+
+            //}
+
+
+            //Sales.Items.Add("");
+            //SQL_query0 = "select Trans_Value from ERS_Trans where Trans_Type='Sales'  order by Trans_Order ";
+            //using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query0))
+            //{
+            //    while (rdr.Read())
+            //    {
+            //        Sales.Items.Add(Convert.ToString(rdr.GetSqlValue(0)));
+            //    }
+
+            //}
+            string selectstation = Station.SelectedItem.Value;
+            string wherestation = "";
+            if (selectstation != "")
+                wherestation = " and Trans_Station='" + selectstation + "'";
+
+            Sales.Items.Clear();
+
+            Sales.Items.Add("");
+            string SQL_query = "select Trans_Value from ERS_Trans where Trans_Type='Sales'" + wherestation + "  order by Trans_Order";
+            using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query))
+            {
+                while (rdr.Read())
+                {
+                    Sales.Items.Add(Convert.ToString(rdr.GetSqlValue(0)));
+                }
+
+            }
+
+
+            Deposit.Items.Clear();
             Deposit.Items.Add("");
-             SQL_query0 = "select Trans_Value from ERS_Trans where Trans_Type='Deposit'  order by Trans_Order ";
-            using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query0))
+            string SQL_query1 = "select Trans_Value from ERS_Trans where Trans_Type='Deposit' " + wherestation + "  order by Trans_Order";
+            using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query1))
             {
                 while (rdr.Read())
                 {
@@ -83,17 +133,18 @@ public partial class Add_Data : System.Web.UI.Page
             }
 
 
-            Sales.Items.Add("");
-            SQL_query0 = "select Trans_Value from ERS_Trans where Trans_Type='Sales'  order by Trans_Order ";
-            using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query0))
+
+
+            Currency.Items.Clear();
+            SQL_query1 = "select Trans_Value from ERS_Trans where Trans_Type='Currency'  " + wherestation + "    order by Trans_Order";
+            using (SqlDataReader rdr1 = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query1))
             {
-                while (rdr.Read())
+                while (rdr1.Read())
                 {
-                    Sales.Items.Add(Convert.ToString(rdr.GetSqlValue(0)));
+                    Currency.Items.Add(Convert.ToString(rdr1.GetSqlValue(0)));
                 }
 
             }
-
             //权限管理
             //string stationsession = Session["Station"].ToString();
             //if (stationsession != "ALL")
@@ -118,9 +169,9 @@ public partial class Add_Data : System.Web.UI.Page
 
 
 
-                if (stationsession != "ALL")
-                {
-                    string SQL_query_num = "select max(Num) from ERS_Receipt where Station='" + stationsession + "'";
+                //if (stationsession != "ALL")
+                //{
+                    string SQL_query_num = "select max(Num) from ERS_Receipt where Station='" + Station.Text + "'";
                     using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query_num))
                     {
                         if (rdr.Read())
@@ -137,7 +188,7 @@ public partial class Add_Data : System.Web.UI.Page
                         }
 
                     }
-                }
+                //}
 
 
 
@@ -162,6 +213,44 @@ public partial class Add_Data : System.Web.UI.Page
 
 
                         Station.SelectedValue = Convert.ToString(rdr.GetSqlValue(1)).Trim();
+
+                        //如果是修改，要重新查询下拉框
+                        Sales.Items.Clear();
+                        Sales.Items.Add("");
+                        SQL_query = "select Trans_Value from ERS_Trans where Trans_Type='Sales' and Trans_Station='" + Convert.ToString(rdr.GetSqlValue(1)).Trim() + "'  order by Trans_Order";
+                        using (SqlDataReader rdr1 = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query))
+                        {
+                            while (rdr1.Read())
+                            {
+                                Sales.Items.Add(Convert.ToString(rdr1.GetSqlValue(0)));
+                            }
+
+                        }
+
+                        Deposit.Items.Clear();
+                        Deposit.Items.Add("");
+                        SQL_query1 = "select Trans_Value from ERS_Trans where Trans_Type='Deposit' and Trans_Station='" + Convert.ToString(rdr.GetSqlValue(1)).Trim() + "'  order by Trans_Order";
+                        using (SqlDataReader rdr1 = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query1))
+                        {
+                            while (rdr1.Read())
+                            {
+                                Deposit.Items.Add(Convert.ToString(rdr1.GetSqlValue(0)));
+                            }
+
+                        }
+                        
+
+                        Currency.Items.Clear();
+                        SQL_query1 = "select Trans_Value from ERS_Trans where Trans_Type='Currency' and Trans_Station='" + Convert.ToString(rdr.GetSqlValue(1)).Trim() + "'  order by Trans_Order";
+                        using (SqlDataReader rdr1 = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query1))
+                        {
+                            while (rdr1.Read())
+                            {
+                                Currency.Items.Add(Convert.ToString(rdr1.GetSqlValue(0)));
+                            }
+
+                        }
+
                         Station.Enabled = false;
                         Station.BackColor = ColorTranslator.FromHtml("#f9f9f9");
                         Num.Text = Convert.ToString(rdr.GetSqlValue(2));
@@ -351,28 +440,53 @@ public partial class Add_Data : System.Web.UI.Page
     }
     protected void Station_SelectedIndexChanged(object sender, EventArgs e)
     {
-        string stationselect = Station.SelectedValue;
+        
+            string selectstation = Station.SelectedItem.Value;
+            string wherestation = "";
+            if (selectstation != "")
+                wherestation = " and Trans_Station='" + selectstation + "'";
 
-        if (stationselect != "")
-        {
+            Sales.Items.Clear();
 
-            //联动下拉框
-
-
-
-            Currency.Items.Clear();
-            string SQL_query0 = "select Trans_Value from ERS_Trans where Trans_Type='Currency' and  Trans_Station='" + stationselect + "'  order by Trans_Order ";
-            using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query0))
+            Sales.Items.Add("");
+            string SQL_query = "select Trans_Value from ERS_Trans where Trans_Type='Sales'" + wherestation + "  order by Trans_Order";
+            using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query))
             {
                 while (rdr.Read())
                 {
-                    Currency.Items.Add(Convert.ToString(rdr.GetSqlValue(0)));
+                    Sales.Items.Add(Convert.ToString(rdr.GetSqlValue(0)));
                 }
 
             }
 
 
-            string SQL_query_num = "select max(Num) from ERS_Receipt where Station='" + stationselect + "'";
+            Deposit.Items.Clear();
+            Deposit.Items.Add("");
+            string SQL_query1 = "select Trans_Value from ERS_Trans where Trans_Type='Deposit' " + wherestation + "  order by Trans_Order";
+            using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query1))
+            {
+                while (rdr.Read())
+                {
+                    Deposit.Items.Add(Convert.ToString(rdr.GetSqlValue(0)));
+                }
+
+            }
+
+
+
+              Currency.Items.Clear();
+            SQL_query1 = "select Trans_Value from ERS_Trans where Trans_Type='Currency'  " + wherestation + "    order by Trans_Order";
+            using (SqlDataReader rdr1 = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query1))
+            {
+                while (rdr1.Read())
+                {
+                    Currency.Items.Add(Convert.ToString(rdr1.GetSqlValue(0)));
+                }
+
+            }
+
+
+            string SQL_query_num = "select max(Num) from ERS_Receipt where Station='" + selectstation + "'";
             using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query_num))
             {
                 if (rdr.Read())
@@ -390,8 +504,7 @@ public partial class Add_Data : System.Web.UI.Page
 
             }
 
-        }
-
+      
 
     }
     protected void Save_Click(object sender, EventArgs e)

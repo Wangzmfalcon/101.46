@@ -185,4 +185,17 @@ public partial class Home : System.Web.UI.Page
     //    }
     //    ClientScript.RegisterStartupScript(GetType(), "message", "<script>alert('修改成功');</script>");
     //}
+    protected void Button6_Click(object sender, EventArgs e)
+    {
+        string Rday = Expiry_Date.Text;
+        string SQL_update = "update Outstation_MOA_Monitoring "
+                   + "set Outstation_MOA_Monitoring.Expiry_Date_P = '" + Rday + "'"
+                   + " where   Record_S ='1'";
+
+        using (SqlConnection conn = new SqlConnection(SqlHelper.Conn))
+        {
+            SqlHelper.ExecuteNonQuery(conn, CommandType.Text, SQL_update);
+        }
+        ClientScript.RegisterStartupScript(GetType(), "message", "<script>alert('修改成功');</script>");
+    }
 }

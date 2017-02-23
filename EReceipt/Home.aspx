@@ -24,7 +24,7 @@
             <div class="bodydiv">
                   <p style="margin-top: 0; padding-top: 20px; font-family: Perpetua,AkzidenzGrotesk,Cambria; margin-left: 55px;font-size:20px"><b>Version 1.0</b></p>
                 <div style="  font-family:Perpetua,AkzidenzGrotesk,Cambria;margin-left: 55px; ">
-                    <p>1.User Guideline<a class="fa fa-download" href="temp/E-Receipt User Guideline.xlsx"></a></p>
+                    <p>1.User Guideline<a class="fa fa-download" href="temp/E-Receipt User Guideline.docx"></a></p>
                   
                 </div>
 

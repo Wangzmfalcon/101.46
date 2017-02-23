@@ -1,0 +1,25 @@
+@charset "utf-8";
+/* CSS Document */
+/*golbal*/
+body {font:81.25% arial, helvetica, sans-serif;margin-top: 0px;margin-right: 8px;margin-bottom: 0;margin-left: 8px;color: #003366;}
+
+#top{width:1000px;margin-bottom:5px;margin-top:8px;}
+.logo{width:20%;float:left;padding-top:6px;}
+.toptitle{width:600px;float:left;line-height:40px;text-align:right;color:#003366;font-size: 26px;font-weight: bold;padding-top:6px;padding-bottom:5px;}
+.version{width:100px;float:left;line-height:50px;text-align:left;color:#003366;font-size: 12px;font-weight: bold;padding-top:6px;padding-bottom:5px;}
+
+#backpanel{width:1000px;margin:0 auto;position:relative;
+	top: 0px;
+	left: 0px;}
+#pagebody 	
+{
+	
+	width:1000px; 	
+	height:700px}
+
+#leftmenu{background-color:#990033;text-align:left;width:190px; height:700px;float:left; margin:0 auto auto 0}
+#Contentpanel{background-color:#EEEEEE;height:700px;width:1000px; float:left; margin:0 auto;}
+
+#systitle{width:1000px;margin-right:auto;margin-left:auto;margin-top:3px;position:relative;overflow:hidden}
+
+#copyright{ text-align:center; font-style:normal; font-weight:bolder; border-bottom:4px solid #382649; width:1000px; margin-bottom:10px;}

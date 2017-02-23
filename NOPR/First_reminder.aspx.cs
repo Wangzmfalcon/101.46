@@ -197,7 +197,7 @@ public partial class First_reminder : System.Web.UI.Page
         AlternateView htmlBody = AlternateView.CreateAlternateViewFromString(txbody, null, "text/html");
 
         //图片添加
-        LinkedResource lrImage = new LinkedResource(Server.MapPath(Request.ApplicationPath) + "/images/2.jpg", "image/gif");
+        LinkedResource lrImage = new LinkedResource(Server.MapPath(Request.ApplicationPath) + "/images/2.jpg", "image/jpeg");
         lrImage.ContentId = "last";
         htmlBody.LinkedResources.Add(lrImage);
 
@@ -387,7 +387,16 @@ public partial class First_reminder : System.Web.UI.Page
             parms[2].Value = row[2].ToString();
             string a = row[3].ToString().Trim();
             parms[3].Value = Convert.ToDateTime(row[3].ToString().Trim()).ToShortDateString();
-            parms[4].Value = row[4].ToString();
+          
+            try {
+
+                parms[4].Value = Convert.ToDateTime(row[4].ToString().Trim()).ToString("HH:mm:ss");
+            }
+            catch(Exception ex)
+            {
+              parms[4].Value = row[4].ToString();
+            }
+          
             parms[5].Value = row[5].ToString();
             parms[6].Value = row[6].ToString();
             parms[7].Value = row[7].ToString();

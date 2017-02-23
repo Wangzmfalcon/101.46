@@ -48,7 +48,7 @@
                             <td>Station:
                             </td>
                             <td>
-                                <asp:DropDownList ID="Station" CssClass="datainput" runat="server" OnSelectedIndexChanged="Station_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                <asp:DropDownList ID="Station" CssClass="datainput" runat="server" OnSelectedIndexChanged="Station_SelectedIndexChanged"  AutoPostBack="true"></asp:DropDownList>
                             </td>
                         </tr>
                         <tr>
@@ -287,11 +287,11 @@
                 err++;
             }
 
-            else if (!$("#Deposit").val()) {
+            //else if (!$("#Deposit").val()) {
 
-                alert("Please select Deposit");
-                err++;
-            }
+            //    alert("Please select Deposit");
+            //    err++;
+            //}
 
             else if (!$("#Sales").val()) {
 

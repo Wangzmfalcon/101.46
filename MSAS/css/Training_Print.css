@@ -1,0 +1,126 @@
+﻿.pagebreak {
+    height: 20px;
+}
+
+.printform {
+    height: 756px;
+    width: 1076px;
+    /*border: 1px solid #000000;*/
+    margin: auto;
+    page: auto;
+    /*text-align:right;*/
+}
+
+
+.printform1 {
+    height: 756px;
+    width: 1076px;
+    /*border: 1px solid #000000;*/
+    margin: auto;
+    page: auto;
+    /*text-align:right;*/
+}
+.print {
+    width: 756px;
+    margin: auto;
+}
+
+@media print {
+
+    .printform {
+        page-break-after: always;
+    }
+}
+
+@page {
+    size: A4 landscape;
+    margin: 0;
+}
+
+
+.printarea {
+    height: 700px;
+    width: 1000px;
+    margin: auto;
+    padding-top: 25px;
+    /*border: 1px solid #000000;*/
+}
+
+.printtitle {
+    position:relative;
+    height: 80px;
+    width: 1000px;
+}
+
+.printbody {
+    height: 602px;
+    width: 1000px;
+}
+
+.printfoot {
+    height: 20px;
+    width: 1000px;
+        font-size: 10px;
+    font-family: Microsoft YaHei,SimHei,Cambria, Helvetica, sans-serif;
+}
+
+.col-md-2 {
+    float: left;
+    width: 16%;
+}
+
+.col-md-10 {
+    float: left;
+    width: 83%;
+}
+
+.col-md-1 {
+    float: left;
+    width: 8.3%;
+}
+.col-md-3 {
+    float: left;
+    width: 25%;
+}
+
+.col-md-4 {
+    float: left;
+    width: 33%;
+}
+
+
+.col-md-8 {
+    float: left;
+    width: 66%;
+}
+
+.col-md-9 {
+    float: left;
+    width: 75%;
+}
+
+
+#basicinfo tr {
+    height: 30px;
+    line-height: 30px;
+    font-size: 13px;
+    font-family: Microsoft YaHei,SimHei,Cambria, Helvetica, sans-serif;
+}
+
+.divlin {
+    height: 15px;
+    line-height: 15px;
+    width: 100%;
+}
+
+
+#trainingdata tr  {
+    height: 45px;
+    line-height: 30px;
+    font-size: 10px;
+    font-family: Microsoft YaHei,SimHei,Cambria, Helvetica, sans-serif;
+}
+
+
+
+

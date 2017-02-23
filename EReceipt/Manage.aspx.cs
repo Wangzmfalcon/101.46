@@ -16,16 +16,25 @@ public partial class Manage : System.Web.UI.Page
         {
             Server.Transfer("Login.aspx");
         }
-        else if(!IsPostBack)
+        else if (!IsPostBack)
         {
             //权限管理
+
+            //权限管理
+            if (Session["Station"] == null || Session["Station"].ToString() == "")
+            {
+
+                Response.Write("<script>alert('You have no authorization to view this page , please contact the administrator')</script>");
+                //ClientScript.RegisterStartupScript(GetType(), "message", "<script>alert('You have no authorization to view this page , please contact the administrator');</script>");
+                Server.Transfer("Home.aspx");
+            }
             string stationsession = Session["Station"].ToString();
             string SQL_query0 = "";
-            Station.Items.Add("");
+        
             if (stationsession == "ALL")
             {
 
-
+                Station.Items.Add("");
                 SQL_query0 = "select STATION from ERS_STATION ";
                 using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query0))
                 {
@@ -61,8 +70,38 @@ public partial class Manage : System.Web.UI.Page
             //}
 
 
+            //Sales.Items.Add("");
+            //string SQL_query = "select Trans_Value from ERS_Trans where Trans_Type='Sales'  order by Trans_Order";         
+            //using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query))
+            //{
+            //    while (rdr.Read())
+            //    {
+            //        Sales.Items.Add(Convert.ToString(rdr.GetSqlValue(0)));
+            //    }
+
+            //}
+
+            //Deposit.Items.Add("");
+            //string SQL_query1 = "select Trans_Value from ERS_Trans where Trans_Type='Deposit'  order by Trans_Order";           
+            //using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query1))
+            //{
+            //    while (rdr.Read())
+            //    {
+            //        Deposit.Items.Add(Convert.ToString(rdr.GetSqlValue(0)));
+            //    }
+
+            //}
+
+
+            string selectstation = Station.SelectedItem.Value;
+            string wherestation = "";
+            if (selectstation != "")
+                wherestation = " and Trans_Station='" + selectstation + "'";
+
+            Sales.Items.Clear();
+
             Sales.Items.Add("");
-            string SQL_query = "select Trans_Value from ERS_Trans where Trans_Type='Sales'  order by Trans_Order";         
+            string SQL_query = "select Trans_Value from ERS_Trans where Trans_Type='Sales'" + wherestation + "  order by Trans_Order";
             using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query))
             {
                 while (rdr.Read())
@@ -72,8 +111,10 @@ public partial class Manage : System.Web.UI.Page
 
             }
 
+
+            Deposit.Items.Clear();
             Deposit.Items.Add("");
-            string SQL_query1 = "select Trans_Value from ERS_Trans where Trans_Type='Deposit'  order by Trans_Order";           
+            string SQL_query1 = "select Trans_Value from ERS_Trans where Trans_Type='Deposit' " + wherestation + "  order by Trans_Order";
             using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query1))
             {
                 while (rdr.Read())
@@ -82,11 +123,28 @@ public partial class Manage : System.Web.UI.Page
                 }
 
             }
-
-
+            //查询回写
+            if (Request.QueryString["station"] != null)
+                Station.SelectedValue = Request.QueryString["station"];
+            if (Request.QueryString["Num"] != null)
+                Num.Text = Request.QueryString["Num"];
+            if (Request.QueryString["Issue_Date"] != null)
+                Issue_Date.Text = Request.QueryString["Issue_Date"];
+            if (Request.QueryString["Received"] != null)
+                Received.Text = Request.QueryString["Received"];
+            if (Request.QueryString["Balance"] != null)
+                Balance.Text = Request.QueryString["Balance"];
+            if (Request.QueryString["Sales"] != null)
+                Sales.SelectedValue = Request.QueryString["Sales"];
+            if (Request.QueryString["Deposit"] != null)
+                Deposit.SelectedValue = Request.QueryString["Deposit"];
             getdata();
+     
+
 
         }
+      
+  
     }
 
 
@@ -160,21 +218,28 @@ public partial class Manage : System.Web.UI.Page
         int Count = pds.PageCount;
         lblCurrentPage.Text = "Current Page：" + CurPage.ToString();
         labPage.Text = Count.ToString();
+
+        //初始化翻页
+        this.first.NavigateUrl = null;
+        this.last.NavigateUrl = null;
+        up.NavigateUrl = null;
+        next.NavigateUrl = null;
+
         if (Count > 1)
         {
-            this.first.NavigateUrl = Request.CurrentExecutionFilePath + "?Page=1";
-            this.last.NavigateUrl = Request.CurrentExecutionFilePath + "?Page=" + Convert.ToString(Count);
+            this.first.NavigateUrl = Request.CurrentExecutionFilePath + "?Page=1" + "&&Station=" + Station.SelectedItem.Value + "&&Num=" + Num.Text + "&&Issue_Date=" + Issue_Date.Text + "&&Received=" + Received.Text + "&&Balance=" + Balance.Text + "&&Sales=" + Sales.SelectedItem.Value + "&&Deposit=" + Deposit.SelectedItem.Value;
+            this.last.NavigateUrl = Request.CurrentExecutionFilePath + "?Page=" + Convert.ToString(Count) + "&&Station=" + Station.SelectedItem.Value + "&&Num=" + Num.Text + "&&Issue_Date=" + Issue_Date.Text + "&&Received=" + Received.Text + "&&Balance=" + Balance.Text + "&&Sales=" + Sales.SelectedItem.Value + "&&Deposit=" + Deposit.SelectedItem.Value;
         }
         if (!pds.IsFirstPage)
         {
 
-            up.NavigateUrl = Request.CurrentExecutionFilePath + "?Page=" + Convert.ToString(CurPage - 1);
+            up.NavigateUrl = Request.CurrentExecutionFilePath + "?Page=" + Convert.ToString(CurPage - 1)  + "&&Station=" + Station.SelectedItem.Value + "&&Num=" + Num.Text + "&&Issue_Date=" + Issue_Date.Text + "&&Received=" + Received.Text + "&&Balance=" + Balance.Text + "&&Sales=" + Sales.SelectedItem.Value + "&&Deposit=" + Deposit.SelectedItem.Value;
         }
 
         if (!pds.IsLastPage)
         {
 
-            next.NavigateUrl = Request.CurrentExecutionFilePath + "?Page=" + Convert.ToString(CurPage + 1);
+            next.NavigateUrl = Request.CurrentExecutionFilePath + "?Page=" + Convert.ToString(CurPage + 1) + "&&Station=" + Station.SelectedItem.Value + "&&Num=" + Num.Text + "&&Issue_Date=" + Issue_Date.Text + "&&Received=" + Received.Text + "&&Balance=" + Balance.Text + "&&Sales=" + Sales.SelectedItem.Value + "&&Deposit=" + Deposit.SelectedItem.Value;
         }
 
 
@@ -190,5 +255,40 @@ public partial class Manage : System.Web.UI.Page
     protected void Search_Click(object sender, EventArgs e)
     {
         getdata();
+    }
+    protected void Station_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+
+        string selectstation = Station.SelectedItem.Value;
+         string wherestation="";
+        if (selectstation!="")
+            wherestation = " and Trans_Station='" + selectstation + "'";
+
+        Sales.Items.Clear();
+
+        Sales.Items.Add("");
+        string SQL_query = "select Trans_Value from ERS_Trans where Trans_Type='Sales'" + wherestation + "  order by Trans_Order";
+        using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query))
+        {
+            while (rdr.Read())
+            {
+                Sales.Items.Add(Convert.ToString(rdr.GetSqlValue(0)));
+            }
+
+        }
+
+
+        Deposit.Items.Clear();
+        Deposit.Items.Add("");
+        string SQL_query1 = "select Trans_Value from ERS_Trans where Trans_Type='Deposit' " + wherestation + "  order by Trans_Order";
+        using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query1))
+        {
+            while (rdr.Read())
+            {
+                Deposit.Items.Add(Convert.ToString(rdr.GetSqlValue(0)));
+            }
+
+        }
     }
 }

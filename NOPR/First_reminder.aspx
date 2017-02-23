@@ -51,7 +51,7 @@
                             <td><font> <%#Eval("StaffID")%></font></td>
                             <td><font> <%#Eval("Name")%></font></td>
                             <td><font> <%#Eval("Result")%></font></td>
-                            <td><font> <%#Eval("Punch_Date")%></font></td>
+                            <td><font> <%#Convert.ToDateTime(Eval("Punch_Date")).ToString("dd-MM-yyyy")%></font></td>
                             <td><font> <%#Eval("Punch_Time")%></font></td>
                             <td><font> <%#Eval("Email")%></font></td>
                             <td><font> <%#Eval("GM_Email")%></font></td>

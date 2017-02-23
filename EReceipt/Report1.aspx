@@ -42,7 +42,7 @@
                     <span class="clear"></span>
                     <div class="col-md-4">
                         Station:
-                <asp:DropDownList ID="Station" runat="server"></asp:DropDownList>
+                <asp:DropDownList ID="Station" runat="server"  OnSelectedIndexChanged="Station_SelectedIndexChanged"  AutoPostBack="True"></asp:DropDownList>
                     </div>
                     <div class="col-md-4">
                         Num:<asp:TextBox ID="Num" runat="server"></asp:TextBox>
@@ -58,7 +58,7 @@
 
 
                     <div class="col-md-4">
-                        Balance:<asp:TextBox ID="Balance" runat="server"></asp:TextBox>
+                        Net Amount:<asp:TextBox ID="Balance" runat="server"></asp:TextBox>
                     </div>
 
                     <div class="col-md-4">
@@ -73,7 +73,7 @@
                         <asp:LinkButton class="gridbutton" ID="Search" runat="server" Text="Search" OnClick="Search_Click" />
                     </div>
                     <div class="col-md-4">
-                        <a class="fa fa-download fa-2x" style="color:#8981b1" onclick="downloadexcel()"></a>
+                        <a class="fa fa-download fa-2x" style="color: #8981b1" onclick="downloadexcel()"></a>
                         <asp:Button ID="downloadexcelbtn" runat="server" Text="Button" OnClick="downloadexcelbtn_Click" Style="display: none" />
 
                     </div>
@@ -98,8 +98,8 @@
                                     <th>RTNG</th>
                                     <th>PNR</th>
                                     <th>TTL</th>
-
-
+                                    <th>Currency</th>
+                                    <th>Void</th>
                                 </tr>
                         </HeaderTemplate>
                         <ItemTemplate>
@@ -114,7 +114,8 @@
                                 <td><font> <%#Eval("RTNG")%></font></td>
                                 <td><font> <%#Eval("PNR")%></font></td>
                                 <td><font> <%#Eval("TTL")%></font></td>
-
+                                <td><font> <%#Eval("Currency")%></font></td>
+                                <td><font> <%#Eval("Void").ToString()=="False"?"No":"Yes"%></font></td>
                                 <%--  <td>
 
                             <a href="#" title="Edit" onclick="action('Edit','<%#Eval("id")%>')" class="fa fa-edit icon_btn"></a>

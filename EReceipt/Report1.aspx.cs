@@ -33,7 +33,7 @@ public partial class Home : System.Web.UI.Page
             if (stationsession == "ALL")
             {
 
-
+                Station.Items.Add("");
                 SQL_query0 = "select STATION from ERS_STATION ";
                 using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query0))
                 {
@@ -69,8 +69,15 @@ public partial class Home : System.Web.UI.Page
             //}
 
 
+            string selectstation = Station.SelectedItem.Value;
+            string wherestation = "";
+            if (selectstation != "")
+                wherestation = " and Trans_Station='" + selectstation + "'";
+
+            Sales.Items.Clear();
+
             Sales.Items.Add("");
-            string SQL_query = "select Trans_Value from ERS_Trans where Trans_Type='Sales'  order by Trans_Order";
+            string SQL_query = "select Trans_Value from ERS_Trans where Trans_Type='Sales'" + wherestation + "  order by Trans_Order";
             using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query))
             {
                 while (rdr.Read())
@@ -80,8 +87,10 @@ public partial class Home : System.Web.UI.Page
 
             }
 
+
+            Deposit.Items.Clear();
             Deposit.Items.Add("");
-            string SQL_query1 = "select Trans_Value from ERS_Trans where Trans_Type='Deposit'  order by Trans_Order";
+            string SQL_query1 = "select Trans_Value from ERS_Trans where Trans_Type='Deposit' " + wherestation + "  order by Trans_Order";
             using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query1))
             {
                 while (rdr.Read())
@@ -91,10 +100,25 @@ public partial class Home : System.Web.UI.Page
 
             }
 
-
+            //查询回写
+            if (Request.QueryString["station"] != null)
+                Station.SelectedValue = Request.QueryString["station"];
+            if (Request.QueryString["Num"] != null)
+                Num.Text = Request.QueryString["Num"];
+            if (Request.QueryString["Issue_Date"] != null)
+                Issue_Date.Text = Request.QueryString["Issue_Date"];
+            if (Request.QueryString["Received"] != null)
+                Received.Text = Request.QueryString["Received"];
+            if (Request.QueryString["Balance"] != null)
+                Balance.Text = Request.QueryString["Balance"];
+            if (Request.QueryString["Sales"] != null)
+                Sales.SelectedValue = Request.QueryString["Sales"];
+            if (Request.QueryString["Deposit"] != null)
+                Deposit.SelectedValue = Request.QueryString["Deposit"];
             getdata();
 
         }
+     
     }
 
 
@@ -168,22 +192,30 @@ public partial class Home : System.Web.UI.Page
         int Count = pds.PageCount;
         lblCurrentPage.Text = "Current Page：" + CurPage.ToString();
         labPage.Text = Count.ToString();
+
+
+        this.first.NavigateUrl = null;
+        this.last.NavigateUrl = null;
+        up.NavigateUrl = null;
+        next.NavigateUrl = null;
+
         if (Count > 1)
         {
-            this.first.NavigateUrl = Request.CurrentExecutionFilePath + "?Page=1";
-            this.last.NavigateUrl = Request.CurrentExecutionFilePath + "?Page=" + Convert.ToString(Count);
+            this.first.NavigateUrl = Request.CurrentExecutionFilePath + "?Page=1" + "&&Station=" + Station.SelectedItem.Value + "&&Num=" + Num.Text + "&&Issue_Date=" + Issue_Date.Text + "&&Received=" + Received.Text + "&&Balance=" + Balance.Text + "&&Sales=" + Sales.SelectedItem.Value + "&&Deposit=" + Deposit.SelectedItem.Value;
+            this.last.NavigateUrl = Request.CurrentExecutionFilePath + "?Page=" + Convert.ToString(Count) + "&&Station=" + Station.SelectedItem.Value + "&&Num=" + Num.Text + "&&Issue_Date=" + Issue_Date.Text + "&&Received=" + Received.Text + "&&Balance=" + Balance.Text + "&&Sales=" + Sales.SelectedItem.Value + "&&Deposit=" + Deposit.SelectedItem.Value;
         }
         if (!pds.IsFirstPage)
         {
 
-            up.NavigateUrl = Request.CurrentExecutionFilePath + "?Page=" + Convert.ToString(CurPage - 1);
+            up.NavigateUrl = Request.CurrentExecutionFilePath + "?Page=" + Convert.ToString(CurPage - 1) + "&&Station=" + Station.SelectedItem.Value + "&&Num=" + Num.Text + "&&Issue_Date=" + Issue_Date.Text + "&&Received=" + Received.Text + "&&Balance=" + Balance.Text + "&&Sales=" + Sales.SelectedItem.Value + "&&Deposit=" + Deposit.SelectedItem.Value;
         }
 
         if (!pds.IsLastPage)
         {
 
-            next.NavigateUrl = Request.CurrentExecutionFilePath + "?Page=" + Convert.ToString(CurPage + 1);
+            next.NavigateUrl = Request.CurrentExecutionFilePath + "?Page=" + Convert.ToString(CurPage + 1) + "&&Station=" + Station.SelectedItem.Value + "&&Num=" + Num.Text + "&&Issue_Date=" + Issue_Date.Text + "&&Received=" + Received.Text + "&&Balance=" + Balance.Text + "&&Sales=" + Sales.SelectedItem.Value + "&&Deposit=" + Deposit.SelectedItem.Value;
         }
+
 
 
         //Repeater
@@ -200,7 +232,7 @@ public partial class Home : System.Web.UI.Page
     {
 
         getdata();
-        ClientScript.RegisterStartupScript(GetType(), "message", "<script>alert('downloadexcelbtn_Click');</script>");
+        //ClientScript.RegisterStartupScript(GetType(), "message", "<script>alert('downloadexcelbtn_Click');</script>");
         //设置EXCEL列宽
         int[] ColumnWidth = { 10, 20, 20, 20, 20, 20, 20, 30, 20, 20, 20, 20, 50, 20 };
         //获取用户选择的excel文件名称
@@ -224,7 +256,7 @@ public partial class Home : System.Web.UI.Page
         //sheet1
         Worksheet ws = wb.Worksheets[0];
         Cells cell = ws.Cells;
-        ws.Name = "Telephone";
+        ws.Name = "ERS Report";
         //合并第一行单元格
         Range range = cell.CreateRange(0, 0, 1, ColumnWidth.Length);
         range.Merge();
@@ -368,4 +400,41 @@ public partial class Home : System.Web.UI.Page
 
         }
     }
+
+    protected void Station_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+
+        string selectstation = Station.SelectedItem.Value;
+        string wherestation = "";
+        if (selectstation != "")
+            wherestation = " and Trans_Station='" + selectstation + "'";
+
+        Sales.Items.Clear();
+
+        Sales.Items.Add("");
+        string SQL_query = "select Trans_Value from ERS_Trans where Trans_Type='Sales'" + wherestation + "  order by Trans_Order";
+        using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query))
+        {
+            while (rdr.Read())
+            {
+                Sales.Items.Add(Convert.ToString(rdr.GetSqlValue(0)));
+            }
+
+        }
+
+
+        Deposit.Items.Clear();
+        Deposit.Items.Add("");
+        string SQL_query1 = "select Trans_Value from ERS_Trans where Trans_Type='Deposit' " + wherestation + "  order by Trans_Order";
+        using (SqlDataReader rdr = SqlHelper.ExecuteReader(SqlHelper.Conn, CommandType.Text, SQL_query1))
+        {
+            while (rdr.Read())
+            {
+                Deposit.Items.Add(Convert.ToString(rdr.GetSqlValue(0)));
+            }
+
+        }
+    }
+
 }

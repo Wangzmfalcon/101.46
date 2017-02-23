@@ -42,7 +42,7 @@
                     <span class="clear"></span>
                     <div class="col-md-4">
                         Station:
-                <asp:DropDownList ID="Station" runat="server"></asp:DropDownList>
+                <asp:DropDownList ID="Station" runat="server" OnSelectedIndexChanged="Station_SelectedIndexChanged"  AutoPostBack="True"></asp:DropDownList>
                     </div>
                     <div class="col-md-4">
                         Num:<asp:TextBox ID="Num" runat="server"></asp:TextBox>
@@ -109,27 +109,19 @@
                                 <td><font> <%#Eval("TTL")%></font></td>
                                 <td><font> <%#Eval("Remark")%></font></td>
 
-                    <%--            <td><font>                                   </font></td>--%>
                                 <td>
 
                                     <a href="#" title="Edit" onclick="action('Edit','<%#Eval("id")%>')" class="fa fa-edit icon_btn"></a>
                                   <a href="#" title="Print" onclick="action('Print','<%#Eval("id")%>')" class="fa fa-print icon_btn"></a>
-                                   <%#Eval("Void").ToString() == "True" ? "<i class=\"fa fa-times\" aria-hidden=\"true\" style=\"color:red\"></i>":"<a href=\"#\" title=\"Void\" onclick=\"action('Void','<%#Eval(\"id\")')\" class=\"fa fa-trash icon_btn\"></a>"%> 
+                                   <%#Eval("Void").ToString() == "True" ? "<i class=\"fa fa-times\" aria-hidden=\"true\" style=\"color:red\"></i>":"<a href=\"#\" title=\"Void\" onclick=\"action('Void','"+Eval("id")+"')\" class=\"fa fa-trash icon_btn\"></a>"%> 
                                 </td>
 
            
 
-                                <%-- <td>
-                            <a class="gridbutton" role="button" onclick="deleteitem('<%#Eval("id") %>','<%#Eval("STATION")%>','<%#Eval("STATION_CODE")%>','<%#Eval("STATION_NAME")%>')">Delete</a>
-
-                        </td>--%>
+               
                             </tr>
                         </ItemTemplate>
-                        <%--   <AlternatingItemTemplate>
-                    <tr>
-                        <td><a href='Default.aspx?id=<%#"databaselogid" %>'><%#("STATION_NAME")%></a></td>
-                    </tr>
-                </AlternatingItemTemplate>--%>
+                       
                         <FooterTemplate>
                             </table>
                         </FooterTemplate>
